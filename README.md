@@ -1,7 +1,8 @@
-# bedu-webjava-f3m1
-Proyecto Equipo 12 - Desarrollo Web Java Bedu - Fase 3 Módulo 1 Java Backend II
+## **Desarrollo Web Java Bedu**
+### **Proyecto de módulo**
+- Fase 3 Módulo 1: Java Backend II
  
-## Integrantes:
+### Equipo 12:
 - Alma Guadalupe López Arellano
 - Guadalupe Valenzuela Soto
 - Marco Antonio Cárdenas Medina
