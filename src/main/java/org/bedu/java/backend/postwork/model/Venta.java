@@ -1,5 +1,14 @@
 package org.bedu.java.backend.postwork.model;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.PositiveOrZero;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 public class Venta {
   
   @PositiveOrZero(message = "El identificador de la venta no puede ser negativo.")

@@ -1,5 +1,13 @@
 package org.bedu.java.backend.postwork.model;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import java.time.LocalDateTime;
+
 public class Visita {
   
   @PositiveOrZero(message = "El identificador de la visita no puede ser negativo.")

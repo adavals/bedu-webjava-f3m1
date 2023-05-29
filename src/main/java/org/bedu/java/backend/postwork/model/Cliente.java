@@ -1,5 +1,13 @@
 package org.bedu.java.backend.postwork.model;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+
 public class Cliente {
   @PositiveOrZero(message = "El identificador no puede ser un numero negativo")
     private long id;

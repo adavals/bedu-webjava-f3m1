@@ -1,5 +1,10 @@
 package org.bedu.java.backend.postwork.model;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+
 public class Etapa {
   
   @PositiveOrZero(message = "El identificador  de la etapa no puede ser negativo.")

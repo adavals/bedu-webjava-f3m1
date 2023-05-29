@@ -1,5 +1,15 @@
 package org.bedu.java.backend.postwork.model;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+
+
+import java.time.LocalDate;
+
 public class Producto {
   
   @PositiveOrZero(message = "El identificador del producto no puede ser negativo.")
@@ -14,7 +24,7 @@ public class Producto {
     private float precio;
   
     @NotEmpty(message = "El numero de registro del producto no puede estar en blanco.")
-    @Patter(regexp = "^(\\d{3}[-]?){2}\\d{4}$")
+    @Pattern(regexp = "^(\\d{3}[-]?){2}\\d{4}$")
     private String numRegistro;
   
     @PastOrPresent(message = "La fecha de creacion del producto no puede ocurrir en el futuro.")
