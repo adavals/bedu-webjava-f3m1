@@ -1,5 +1,6 @@
 package org.bedu.java.backend.postwork.model.builder;
 
+import org.bedu.java.backend.postwork.model.RespuestaError;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

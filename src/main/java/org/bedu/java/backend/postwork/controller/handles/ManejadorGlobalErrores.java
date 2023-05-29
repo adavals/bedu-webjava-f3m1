@@ -1,5 +1,6 @@
 package org.bedu.java.backend.postwork.controller.handles;
 
+import org.bedu.java.backend.postwork.model.RespuestaError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
