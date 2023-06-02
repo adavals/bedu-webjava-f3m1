@@ -6,10 +6,15 @@ import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 
 import java.time.LocalDate;
-
+@Data
+@Builder
+@RequiredArgsConstructor
 public class Producto {
   
   @PositiveOrZero(message = "El identificador del producto no puede ser negativo.")
