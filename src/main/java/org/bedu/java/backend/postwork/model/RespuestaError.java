@@ -7,9 +7,7 @@ import org.bedu.java.backend.postwork.model.builder.RespuestaErrorBuilder;
 
 import java.time.LocalDateTime;
 import java.util.Map;
-@Data
-@Builder
-@RequiredArgsConstructor
+
 public class RespuestaError {
 
     private final LocalDateTime timestamp = LocalDateTime.now();

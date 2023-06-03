@@ -4,6 +4,7 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @Builder
 @RequiredArgsConstructor
+@AllArgsConstructor  // Required to make @Builder and @RequiredArgsConstructor work together
 public class Venta {
   
   @PositiveOrZero(message = "El identificador de la venta no puede ser negativo.")
