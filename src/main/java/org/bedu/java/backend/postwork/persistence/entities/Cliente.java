@@ -1,9 +1,8 @@
 package org.bedu.java.backend.postwork.persistence.entities;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Data
 @Table(name = "CLIENTES")

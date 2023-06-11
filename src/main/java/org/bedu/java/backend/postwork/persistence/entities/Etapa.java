@@ -1,11 +1,13 @@
 package org.bedu.java.backend.postwork.persistence.entities;
 
-import lombok.*;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Table(name = "ETAPAS")
+@Entity
 @NoArgsConstructor
 public class Etapa {
   

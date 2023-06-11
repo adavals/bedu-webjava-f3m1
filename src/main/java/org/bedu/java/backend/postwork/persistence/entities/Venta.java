@@ -1,12 +1,13 @@
 package org.bedu.java.backend.postwork.persistence.entities;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 @Data
 @Table(name = "VENTAS")
+@Entity
 @NoArgsConstructor
 public class Venta {
   

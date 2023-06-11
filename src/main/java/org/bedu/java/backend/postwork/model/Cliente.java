@@ -7,10 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
@@ -18,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor   // Required to make @Builder and @RequiredArgsConstructor work together
 public class Cliente {
   @PositiveOrZero(message = "El identificador no puede ser un numero negativo")
-    private long id;
+    private long Id;
   
     @NotEmpty(message = "El campo no puede estar vacio.")
     @Size(min = 5, max = 30, message = "El nombre debe ser entre 5 y 30 letras.")
