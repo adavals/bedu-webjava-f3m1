@@ -29,6 +29,7 @@ import static org.hamcrest.Matchers.is;
 
 @WebMvcTest(ProductoController.class)
 class ProductoControllerTest {
+    @SuppressWarnings("unused")
     @Autowired
     private MockMvc mockMvc;
 
@@ -45,7 +46,7 @@ class ProductoControllerTest {
                                 .precio(500.0f)
                                 .categoria("unico")
                                 .numRegistro("123-456-7777")
-                                .fechaCreacion(LocalDate.of(2023,01,01 ))
+                                .fechaCreacion(LocalDate.of(2023,1,1 ))
                                 .build())
                     );
 
@@ -58,7 +59,7 @@ class ProductoControllerTest {
                 .andExpect(jsonPath("$.precio", is(500.0)))
                 .andExpect(jsonPath("$.categoria", is("unico")))
                 .andExpect(jsonPath("$.numRegistro", is("123-456-7777")))
-                .andExpect(jsonPath("$.fechaCreacion", is(LocalDate.of(2023,01,01 ).toString())))
+                .andExpect(jsonPath("$.fechaCreacion", is(LocalDate.of(2023,1,1 ).toString())))
         ;
     }
 
@@ -66,9 +67,9 @@ class ProductoControllerTest {
     void getProductos() throws Exception {
 
         List<Producto> productos = Arrays.asList(
-                Producto.builder().id(1L).nombre("Producto Hermoso 1").precio(500.0f).categoria("unico").numRegistro("123-456-7777").fechaCreacion(LocalDate.of(2023,01,01 )).build(),
-                Producto.builder().id(2L).nombre("Producto Hermoso 2").precio(1500.0f).categoria("unico").numRegistro("123-456-8888").fechaCreacion(LocalDate.of(2023,01,02 )).build(),
-                Producto.builder().id(3L).nombre("Producto Hermoso 3").precio(2500.0f).categoria("unico").numRegistro("123-456-9999").fechaCreacion(LocalDate.of(2023,01,03 )).build()
+                Producto.builder().id(1L).nombre("Producto Hermoso 1").precio(500.0f).categoria("unico").numRegistro("123-456-7777").fechaCreacion(LocalDate.of(2023,1,1 )).build(),
+                Producto.builder().id(2L).nombre("Producto Hermoso 2").precio(1500.0f).categoria("unico").numRegistro("123-456-8888").fechaCreacion(LocalDate.of(2023,1,2 )).build(),
+                Producto.builder().id(3L).nombre("Producto Hermoso 3").precio(2500.0f).categoria("unico").numRegistro("123-456-9999").fechaCreacion(LocalDate.of(2023,1,3 )).build()
         );
 
         given(productoService.obtieneProductos()).willReturn(productos);
@@ -84,17 +85,17 @@ class ProductoControllerTest {
                 .andExpect(jsonPath("$[1].precio", is(1500.0)))
                 .andExpect(jsonPath("$[2].categoria", is("unico")))
                 .andExpect(jsonPath("$[0].numRegistro", is("123-456-7777")))
-                .andExpect(jsonPath("$[1].fechaCreacion", is(LocalDate.of(2023,01,02 ).toString())));
+                .andExpect(jsonPath("$[1].fechaCreacion", is(LocalDate.of(2023,1,2 ).toString())));
     }
 
     @Test
     void creaProducto() throws Exception {
-        Producto productoParametro = Producto.builder().id(1L).nombre("Producto Hermoso 1").precio(500.0f).categoria("unico").numRegistro("123-456-7890").fechaCreacion(LocalDate.of(2023,01,01 )).build();
-        Producto productoRespuesta = Producto.builder().id(1L).nombre("Producto Hermoso 1").precio(500.0f).categoria("unico").numRegistro("123-456-7890").fechaCreacion(LocalDate.of(2023,01,01 )).build();
+        Producto productoParametro = Producto.builder().id(1L).nombre("Producto Hermoso 1").precio(500.0f).categoria("unico").numRegistro("123-456-7890").fechaCreacion(LocalDate.of(2023,1,1 )).build();
+        Producto productoRespuesta = Producto.builder().id(1L).nombre("Producto Hermoso 1").precio(500.0f).categoria("unico").numRegistro("123-456-7890").fechaCreacion(LocalDate.of(2023,1,1 )).build();
 
         given(productoService.guardaProducto(productoParametro)).willReturn(productoRespuesta);
 
-        // to add support DateTimes types to objectMapper created outside of springframework
+        // to add support DateTimes types to objectMapper created outside springframework
         ObjectMapper objectMapper = JsonMapper.builder().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .addModule(new JavaTimeModule()).build();
 
@@ -107,7 +108,7 @@ class ProductoControllerTest {
     @Test
     void actualizaProducto() throws Exception {
 
-        Producto productoParametro = Producto.builder().id(1L).nombre("Producto Hermoso 1").precio(500.0f).categoria("unico").numRegistro("123-456-7890").fechaCreacion(LocalDate.of(2023,01,01 )).build();
+        Producto productoParametro = Producto.builder().id(1L).nombre("Producto Hermoso 1").precio(500.0f).categoria("unico").numRegistro("123-456-7890").fechaCreacion(LocalDate.of(2023,1,1 )).build();
 
         ObjectMapper objectMapper = JsonMapper.builder().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .addModule(new JavaTimeModule()).build();
