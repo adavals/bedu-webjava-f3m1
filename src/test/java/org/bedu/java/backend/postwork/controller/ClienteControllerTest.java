@@ -33,7 +33,7 @@ class ClienteControllerTest {
 
     @Test
     void getCliente() throws Exception {
-        given(clienteService.obtenCliente(anyLong())).willReturn(Optional.of(Cliente.builder().Id(1L).nombre("Cliente VIP 1").correoContacto("cliente.vip1@vipmail.com").build()));
+        given(clienteService.obtenCliente(anyLong())).willReturn(Optional.of(Cliente.builder().id(1L).nombre("Cliente VIP 1").correoContacto("cliente.vip1@vipmail.com").build()));
 
         mockMvc.perform(get("/cliente/1")
                         .content(MediaType.APPLICATION_JSON_VALUE))
@@ -48,9 +48,9 @@ class ClienteControllerTest {
     void getClientes() throws Exception {
 
         List<Cliente> clientes = Arrays.asList(
-                Cliente.builder().Id(1L).nombre("Cliente VIP 1").direccion("Colinas Platino").numEmpleados(String.valueOf(10)).correoContacto("contacto.vip1@vipmail.com").build(),
-                Cliente.builder().Id(2L).nombre("Cliente medio VIP 2").direccion("Villa Dorada").numEmpleados(String.valueOf(15)).correoContacto("casivip@gmail.com").build(),
-                Cliente.builder().Id(3L).nombre("Cliente 3").direccion("Mi Colonia Hermosa").numEmpleados(String.valueOf(20)).correoContacto("cliente3@gmail.com").build()
+                Cliente.builder().id(1L).nombre("Cliente VIP 1").direccion("Colinas Platino").numEmpleados(String.valueOf(10)).correoContacto("contacto.vip1@vipmail.com").build(),
+                Cliente.builder().id(2L).nombre("Cliente medio VIP 2").direccion("Villa Dorada").numEmpleados(String.valueOf(15)).correoContacto("casivip@gmail.com").build(),
+                Cliente.builder().id(3L).nombre("Cliente 3").direccion("Mi Colonia Hermosa").numEmpleados(String.valueOf(20)).correoContacto("cliente3@gmail.com").build()
         );
 
         given(clienteService.obtenClientes()).willReturn(clientes);
@@ -70,7 +70,7 @@ class ClienteControllerTest {
     @Test
     void creaCliente() throws Exception {
         Cliente clienteParametro = Cliente.builder().nombre("Cliente VIP 1").direccion("Colinas Platino").numEmpleados(String.valueOf(1000)).correoContacto("contacto.vip1@vipmail.com").build();
-        Cliente clienteRespuesta = Cliente.builder().Id(1L).nombre("Cliente VIP 1").direccion("Colinas Platino").numEmpleados(String.valueOf(1000)).correoContacto("contacto.vip1@vipmail.com").build();
+        Cliente clienteRespuesta = Cliente.builder().id(1L).nombre("Cliente VIP 1").direccion("Colinas Platino").numEmpleados(String.valueOf(1000)).correoContacto("contacto.vip1@vipmail.com").build();
 
         given(clienteService.guardaCliente(clienteParametro)).willReturn(clienteRespuesta);
 

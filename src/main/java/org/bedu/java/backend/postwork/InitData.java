@@ -103,6 +103,10 @@ public class InitData implements ApplicationRunner {
         visita.setFechaProgramada(LocalDateTime.of(2023,6,30,10,0));
         visitaRepository.save(visita);
 
+        System.out.println("------------------------");
+        System.out.println("--- Data initialized ---");
+        System.out.println("------------------------");
+
     }
 
 

@@ -15,7 +15,7 @@ import lombok.*;
 @AllArgsConstructor   // Required to make @Builder and @RequiredArgsConstructor work together
 public class Cliente {
   @PositiveOrZero(message = "El identificador no puede ser un numero negativo")
-    private long Id;
+    private long id;
   
     @NotEmpty(message = "El campo no puede estar vacio.")
     @Size(min = 5, max = 30, message = "El nombre debe ser entre 5 y 30 letras.")

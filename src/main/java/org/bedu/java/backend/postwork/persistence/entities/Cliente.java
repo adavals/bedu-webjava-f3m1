@@ -1,6 +1,7 @@
 package org.bedu.java.backend.postwork.persistence.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
