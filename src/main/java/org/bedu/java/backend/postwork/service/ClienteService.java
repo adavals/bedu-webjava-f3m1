@@ -26,12 +26,6 @@ public class ClienteService {
         return repository.findAll().stream().map(cliente -> mapper.clienteEntityToClienteModel(cliente)).collect(Collectors.toList());
     }
 
-/*    public <Cliente> obtenCliente(long idCliente) {
-        return repository.findById(idCliente)
-                .map(cliente -> mapper.clienteEntityToClienteModel(cliente))));
-
-    }*/
-
     public Optional<Cliente> obtenCliente(long idCliente) {
         return repository.findById(idCliente)
                 .map(cliente -> Optional.of(mapper.clienteEntityToClienteModel(cliente)))

@@ -18,10 +18,16 @@ import java.util.Optional;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@AutoConfigureRestDocs()
+@AutoConfigureRestDocs(uriScheme = "https", uriHost = "bedu.org/rest", uriPort = 80)
 @WebMvcTest(ClienteController.class)
 class ClienteControllerTest {
 
@@ -37,13 +43,24 @@ class ClienteControllerTest {
     void getCliente() throws Exception {
         given(clienteService.obtenCliente(anyLong())).willReturn(Optional.of(Cliente.builder().id(1L).nombre("Cliente VIP 1").correoContacto("cliente.vip1@vipmail.com").build()));
 
-        mockMvc.perform(get("/cliente/1")
+        mockMvc.perform(get("/cliente/{clienteId}",1)
                         .content(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.correoContacto", is("cliente.vip1@vipmail.com")))
-                .andExpect(jsonPath("$.nombre", is("Cliente VIP 1")));
+                .andExpect(jsonPath("$.nombre", is("Cliente VIP 1")))
+                .andDo(document("cliente/get-cliente",
+                        pathParameters(
+                                parameterWithName("clienteId").description("Identificador del cliente")
+                        ),
+                        responseFields(
+                                fieldWithPath("id").description("identificador del cliente"),
+                                fieldWithPath("nombre").description("nombre del cliente"),
+                                fieldWithPath("correoContacto").description("correo de contacto del cliente"),
+                                fieldWithPath("numEmpleados").description("número de trabajadores del cliente"),
+                                fieldWithPath("direccion").description("domicilio del cliente")
+                        )));
     }
 
     @Test
@@ -66,7 +83,15 @@ class ClienteControllerTest {
                 .andExpect(jsonPath("$[2].id", is(3)))
                 .andExpect(jsonPath("$[0].correoContacto", is("contacto.vip1@vipmail.com")))
                 .andExpect(jsonPath("$[1].nombre", is("Cliente medio VIP 2")))
-                .andExpect(jsonPath("$[2].direccion", is("Mi Colonia Hermosa")));
+                .andExpect(jsonPath("$[2].direccion", is("Mi Colonia Hermosa")))
+                .andDo(document("cliente/get-clientes",
+                        responseFields(
+                                fieldWithPath("[].id").description("identificador del cliente"),
+                                fieldWithPath("[].nombre").description("nombre del cliente"),
+                                fieldWithPath("[].correoContacto").description("correo de contacto del cliente"),
+                                fieldWithPath("[].numEmpleados").description("número de trabajadores del cliente"),
+                                fieldWithPath("[].direccion").description("domicilio del cliente")
+                        )));
     }
 
     @Test
@@ -79,7 +104,19 @@ class ClienteControllerTest {
         mockMvc.perform(post("/cliente")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(clienteParametro)))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andDo(document("cliente/post-cliente",
+                        requestFields(
+                                fieldWithPath("id").description("El identificador del nuevo cliente"),
+                                fieldWithPath("nombre").description("El nombre del cliente"),
+                                fieldWithPath("direccion").description("La dirección del cliente"),
+                                fieldWithPath("correoContacto").description("La dirección de correo electrónico de contacto"),
+                                fieldWithPath("numEmpleados").description("El número de personas que trabajan en las oficinas e cliente")
+                        ),
+                        responseHeaders(
+                                headerWithName("Location").description("La ubicación del recurso (su identificador generado")
+                        ))
+                );
     }
 
     @Test
@@ -87,16 +124,32 @@ class ClienteControllerTest {
 
         Cliente clienteParametro = Cliente.builder().nombre("Cliente VIP 1").direccion("Colinas Platino").numEmpleados(String.valueOf(1000)).correoContacto("contacto.vip1@vipmail.com").build();
 
-        mockMvc.perform(put("/cliente/1")
+        mockMvc.perform(put("/cliente/{clienteId}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(clienteParametro)))
-                .andExpect(status().isNoContent());
+                .andExpect(status().isNoContent())
+                .andDo(document("cliente/put-cliente",
+                        pathParameters(
+                                parameterWithName("clienteId").description("Identificador del cliente")
+                        ),
+                        requestFields(
+                                fieldWithPath("id").description("El identificador del nuevo cliente"),
+                                fieldWithPath("nombre").description("El nombre del cliente"),
+                                fieldWithPath("direccion").description("La dirección del cliente"),
+                                fieldWithPath("correoContacto").description("La dirección de correo electrónico de contacto"),
+                                fieldWithPath("numEmpleados").description("El número de personas que trabajan en las oficinas e cliente")
+                        )
+                ));
     }
 
     @Test
     void eliminaCliente() throws Exception {
-        mockMvc.perform(delete("/cliente/1")
+        mockMvc.perform(delete("/cliente/{clienteId}", 1)
                         .content(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isNoContent());
+                .andExpect(status().isNoContent())
+                .andDo(document("cliente/delete-cliente",
+                        pathParameters(
+                                parameterWithName("clienteId").description("Identificador del cliente")
+                        )));
     }
 }
